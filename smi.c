@@ -149,7 +149,6 @@ int main(void)
 
 	ticks_per_sec = ticks / secs;
 	printf("TSC %f ticks per second\n", ticks_per_sec);
-	
 
 	if (ioperm(0xb2, 2, 1) < 0) {
 		fprintf(stderr, "Cannot access port 0xb2\n");
@@ -157,7 +156,7 @@ int main(void)
 	}
 
 	printf("hit control-c to stop..\n");
-	
+
 	for (;;) {
 		int i;
 		uint64_t smicount;
@@ -174,7 +173,7 @@ int main(void)
 		smi_usecs = 1000000 * smi_ticks / ticks_per_sec;
 		smi_rate = ticks_per_sec / smi_ticks;
 		readmsr(0, MSR_SMI_COUNT, &smicount);
-		
+
 		printf("SMI count: %" PRIu64 ": %.2f TSC ticks per smi (%.2f us) (%.2f SMIs/sec)\n", smicount, smi_ticks, smi_usecs, smi_rate);
 		fflush(stdout);
 	}
